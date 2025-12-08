@@ -6,6 +6,10 @@ X and O are rendered as animated SVGs with Motion (yes copy paste SVG's from exa
 
 Thomas :penguin:
 
+## Play! :joystick:
+
+https://atictactoe.vercel.app
+
 ## Tech stack
 
 - Vue 3 (script setup)
