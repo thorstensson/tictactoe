@@ -15,6 +15,7 @@
     isDraw,
     handleCellClick,
     resetGame,
+    winningLine,
   } = useTicTacToe()
 
   const winMessages = ['You got lucky!', 'You win!', "Cats don't lose!"]
@@ -35,7 +36,7 @@
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="flex flex-col gap-10">
     <AWinMessage :visible="winner && winner === HUMAN" :message="winMessage" />
     <div class="flex items-center justify-between text-sm font-medium">
       <div>
@@ -47,7 +48,7 @@
           {{ currentPlayer === HUMAN ? 'Your turn (X)' : 'AI thinking (O)…' }}
         </span>
       </div>
-      <AResetButton @click="resetGame" />
+      <AResetButton @click="resetGame">PLAY AGAIN</AResetButton>
     </div>
 
     <div class="relative w-[80vmin] h-[80vmin] mx-auto pointer-events-none">
@@ -58,11 +59,17 @@
         <button
           v-for="(cell, index) in board"
           :key="index"
-          class="flex items-center justify-center aspect-square pointer-events-auto"
+          class="flex items-center justify-center aspect-square pointer-events-auto border-none focus:outline-none focus-visible:outline-none focus:ring-0"
           @click="handleCellClick(index)"
         >
-          <ACross v-if="cell === 'X'" />
-          <ACircle v-else-if="cell === 'O'" />
+          <ACross
+            v-if="cell === 'X'"
+            :dimmed="winner && winningLine && !winningLine.includes(index)"
+          />
+          <ACircle
+            v-else-if="cell === 'O'"
+            :dimmed="winner && winningLine && !winningLine.includes(index)"
+          />
         </button>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply bg-teal-800 text-slate-50;
+    @apply bg-teal-900 text-slate-50;
     font-family: 'DM Sans', system-ui, sans-serif;
   }
 }

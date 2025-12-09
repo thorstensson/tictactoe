@@ -3,11 +3,13 @@ import { ref } from 'vue'
 export function useTicTacToe() {
   const HUMAN = 'X'
   const AI = 'O'
+  const AI_MISTAKE_CHANCE = 0.1 // 10% chance to intentionally play a suboptimal move
 
   const board = ref(Array(9).fill(null)) // each cell: null | 'X' | 'O'
   const currentPlayer = ref(HUMAN) // starts as human
   const winner = ref(null) // 'X' | 'O' | null
   const isDraw = ref(false)
+  const winningLine = ref(null) // null | [number, number, number]
 
   const winningLines = [
     [0, 1, 2],
@@ -24,6 +26,15 @@ export function useTicTacToe() {
     for (const [a, c, d] of winningLines) {
       if (b[a] && b[a] === b[c] && b[a] === b[d]) {
         return b[a]
+      }
+    }
+    return null
+  }
+
+  function findWinningLine(b) {
+    for (const [a, c, d] of winningLines) {
+      if (b[a] && b[a] === b[c] && b[a] === b[d]) {
+        return [a, c, d]
       }
     }
     return null
@@ -74,11 +85,15 @@ export function useTicTacToe() {
     let bestVal = -Infinity
     let bestMove = -1
 
+    const moveScores = []
+
     for (let i = 0; i < 9; i++) {
       if (b[i] === null) {
         b[i] = AI
         const moveVal = minimax(b, 0, false)
         b[i] = null
+
+        moveScores.push({ index: i, score: moveVal })
 
         if (moveVal > bestVal) {
           bestVal = moveVal
@@ -87,13 +102,24 @@ export function useTicTacToe() {
       }
     }
 
+    // If no moves available, return -1
+    if (bestMove === -1) return -1
+
+    // With a small probability, deliberately pick a non-optimal legal move
+    if (Math.random() < AI_MISTAKE_CHANCE && moveScores.length > 1) {
+      const nonBestMoves = moveScores.filter((m) => m.index !== bestMove)
+      const randomIndex = Math.floor(Math.random() * nonBestMoves.length)
+      return nonBestMoves[randomIndex].index
+    }
+
     return bestMove
   }
 
   function updateGameState() {
-    const w = checkWinner(board.value)
-    if (w) {
-      winner.value = w
+    const line = findWinningLine(board.value)
+    if (line) {
+      winningLine.value = line
+      winner.value = board.value[line[0]]
       return
     }
     if (!isMovesLeft(board.value)) {
@@ -122,8 +148,8 @@ export function useTicTacToe() {
 
     if (!winner.value && !isDraw.value) {
       currentPlayer.value = AI
-      // wait a bit longer than the SVG animation duration (0.5s)
-      setTimeout(aiMove, 600)
+      // short pause so the human move animation feels responsive, but AI is quick
+      setTimeout(aiMove, 550)
     }
   }
 
@@ -132,6 +158,7 @@ export function useTicTacToe() {
     winner.value = null
     isDraw.value = false
     currentPlayer.value = HUMAN
+    winningLine.value = null
   }
 
   return {
@@ -141,6 +168,7 @@ export function useTicTacToe() {
     currentPlayer,
     winner,
     isDraw,
+    winningLine,
     handleCellClick,
     resetGame,
   }
