@@ -1,3 +1,5 @@
+![Image](https://github.com/user-attachments/assets/c98cd797-805b-4acc-99b6-0a21ff3f9956)
+
 # Tic Tac Toe
 
 A Tic Tac Toe game built with Vue 3, Vite, Tailwind CSS, and Motion.  
