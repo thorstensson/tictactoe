@@ -44,7 +44,7 @@
       r="240"
       :variants="variants"
       :custom="0"
-      class="stroke-cyan-200 stroke-[40] [stroke-linecap:round] fill-transparent"
+      class="stroke-cyan-200 stroke-40 [stroke-linecap:round] fill-transparent"
     />
   </motion.svg>
 </template>

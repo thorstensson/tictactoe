@@ -32,7 +32,7 @@
     viewBox="0 0 600 600"
     initial="hidden"
     animate="visible"
-    class="w-[70%] h-[70%] focus:outline-none"
+    class="h-[70%] w-[70%] focus:outline-none"
     :style="{
       opacity: dimmed ? 0.5 : 1,
       transition: 'opacity 0.5s ease',
@@ -45,7 +45,7 @@
       y2="490"
       :variants="variants"
       :custom="0"
-      class="stroke-rose-300 stroke-[40] [stroke-linecap:round]"
+      class="stroke-pink-400 stroke-[40] [stroke-linecap:round]"
     />
     <motion.line
       x1="110"
@@ -54,7 +54,7 @@
       y2="110"
       :variants="variants"
       :custom="0.5"
-      class="stroke-rose-300 stroke-[40] [stroke-linecap:round]"
+      class="stroke-pink-400 stroke-[40] [stroke-linecap:round]"
       focusable="false"
       pointer-events="none"
     />

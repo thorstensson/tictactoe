@@ -19,7 +19,7 @@ https://atictactoe.vercel.app
 - Vue 3 (script setup)
 - Vite
 - Tailwind CSS
-- Motion (Vue bindings for Framer Motion-style animations)
+- Motion.dev (Vue bindings for Framer Motion-style animations)
 - Atomic Design
 
 ## Getting started
@@ -32,7 +32,7 @@ npm install
 
 ## Further reading
 
-- [Motion](https://motion.dev/introduction/vue)
+- [Motion](https://motion.dev/examples?platform=vue)
 
 ## License
 

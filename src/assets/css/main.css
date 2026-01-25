@@ -1,0 +1,20 @@
+@import '@fontsource-variable/inter'; /* Body */
+@import '@fontsource-variable/syne';
+@import 'tailwindcss';
+
+@theme {
+  /* Define your custom hex color here */
+  --color-space-black: #121212;
+  /* Override default sans with Inter */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui;
+
+  /* Create custom futuristic header utility */
+  --font-display: 'Syne Variable', sans-serif;
+}
+
+@layer base {
+  body {
+    /* Now you can use it with @apply just like a default color */
+    @apply bg-space-black min-h-screen text-white;
+  }
+}

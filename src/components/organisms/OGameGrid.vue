@@ -57,15 +57,15 @@
       :animate="{ opacity: 1, y: 0, scale: 1 }"
       :transition="{ type: 'spring', stiffness: 90, damping: 18 }"
     >
-      <div class="relative w-[80vmin] h-[80vmin] mx-auto pointer-events-none">
+      <div class="pointer-events-none relative mx-auto h-[80vmin] w-[80vmin]">
         <AGridBg />
 
         <!-- cells overlay -->
-        <div class="grid grid-cols-3 grid-rows-3 w-full h-full">
+        <div class="grid h-full w-full grid-cols-3 grid-rows-3">
           <button
             v-for="(cell, index) in board"
             :key="index"
-            class="flex items-center justify-center aspect-square pointer-events-auto border-none focus:outline-none focus-visible:outline-none focus:ring-0"
+            class="pointer-events-auto flex aspect-square items-center justify-center border-none focus:ring-0 focus:outline-none focus-visible:outline-none"
             @click="handleCellClick(index)"
           >
             <ACross
